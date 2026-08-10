@@ -16,11 +16,13 @@ routes.post("/produto", produtoController.store);
 // parametro
 routes.put("/produto/:id", produtoController.update); 
 // http://localhost:3331/1
+// let { id} = req.params; 
+
 
 
 // Query
 // routes.put("/update", produtoController.update); 
- // let { id} = req.query; 
+// let { id} = req.query; 
 //http://localhost:3331/update?id=1
 
 module.exports = routes;
