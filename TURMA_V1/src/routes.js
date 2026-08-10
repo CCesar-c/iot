@@ -19,10 +19,11 @@ routes.put("/produto/:id", produtoController.update);
 // let { id} = req.params; 
 
 
-
 // Query
 // routes.put("/update", produtoController.update); 
 // let { id} = req.query; 
 //http://localhost:3331/update?id=1
+
+routes.delete("/produto/:id", produtoController.deletar)
 
 module.exports = routes;

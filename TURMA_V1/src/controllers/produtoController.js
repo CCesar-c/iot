@@ -36,6 +36,17 @@ class produtoController {
     )
     return res.status(200).json({ message:"Produto atualizado com sucesso"})
   }
+  async deletar(req, res) {
+    let { id} = req.params;
+    await produto.destroy(
+      {
+        where: {
+          id
+        }
+      }
+    )
+    return res.status(200).json({ message:"Produto Deletado com sucesso"})
+  }
 
 }
 
