@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <button type="button" onclick="Get()">get</button>
+        <button>post</button>
+        <input id="id" placeholder="Insira un id se precisar" />
+        <button>update</button>
+        <button>delete</button>
+    </form>
+
+    </form>
+</body>
+<script>
+    async function Get() {
+        try {
+            const get = await fetch("http://localhost:3331/produto", {
+                mode:"cors",
+                credentials:"include",
+                headers:""
+            })
+            console.log(get);
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    // async function Post() {
+    //     const get = await fetch("http://localhost:3331/produto")
+    //     console.log(get);
+    // }
+    // async function Update() {
+    //     const get = await fetch("http://localhost:3331/produto")
+    //     console.log(get);
+    // }
+    // async function Delete() {
+    //     const get = await fetch("http://localhost:3331/produto")
+    //     console.log(get);
+    // }
+</script>
+
+</html>
