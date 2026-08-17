@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -9,40 +9,94 @@
 
 <body>
     <form>
-        <button type="button" onclick="Get()">get</button>
-        <button>post</button>
         <input id="id" placeholder="Insira un id se precisar" />
-        <button>update</button>
-        <button>delete</button>
+        <input id="nome" placeholder="Nome" />
+        <input id="preco" placeholder="Preco" />
+        <input id="quantidade" placeholder="Quantidade" />
+        <br />
+        <button type="button" onclick="Post()">post</button>
+        <button type="button" onclick="Get()">get</button>
+        <button type="button" onclick=" Update()">update</button>
+        <button type="button" onclick="Delete()">delete</button>
     </form>
 
     </form>
 </body>
 <script>
+    var nome = ""
+    var preco = 0
+    var quantidade = 0
+
+    var id = 0;
+
+
     async function Get() {
         try {
-            const get = await fetch("http://localhost:3331/produto", {
-                mode:"cors",
-                credentials:"include",
-                headers:""
-            })
-            console.log(get);
+            const get = await fetch("http://localhost:3331/produto")
+            const res = await get.json()
+            console.log(res);
         } catch (error) {
             console.error(error)
         }
     }
-    // async function Post() {
-    //     const get = await fetch("http://localhost:3331/produto")
-    //     console.log(get);
-    // }
-    // async function Update() {
-    //     const get = await fetch("http://localhost:3331/produto")
-    //     console.log(get);
-    // }
-    // async function Delete() {
-    //     const get = await fetch("http://localhost:3331/produto")
-    //     console.log(get);
-    // }
+    async function Post() {
+        nome = document.getElementById("nome").value
+        preco = document.getElementById("preco").value
+        quantidade = document.getElementById("quantidade").value
+        console.log(nome + "\n" + preco + "\n" + quantidade)
+        try {
+            const post = await fetch("http://localhost:3331/produto", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nome: nome,
+                    preco: preco,
+                    quantidade: quantidade
+                })
+            })
+            const res = await post.json();
+            console.log(res);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    async function Update() {
+        nome = document.getElementById("nome").value
+        preco = Number(document.getElementById("preco").value)
+        quantidade = Number(document.getElementById("quantidade").value)
+        id = Number(document.querySelector("#id").value);
+
+        console.log(nome + "\n" + preco + "\n" + quantidade)
+
+        const put = await fetch(
+            `http://localhost:3331/produto/${id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nome: nome,
+                    preco: preco,
+                    quantidade: quantidade
+                })
+            }
+        )
+        const res = put.json();
+        console.log(res);
+    }
+    async function Delete() {
+        const del = await fetch(
+            `http://localhost:3331/produto/${id}`,
+            {
+                method: "DELETE",
+            }
+        )
+        const res = del.json();
+        console.log(res);
+    }
 </script>
 
 </html>
