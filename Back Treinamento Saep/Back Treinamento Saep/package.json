@@ -11,12 +11,13 @@
     "reset": "node src/avaliador/reset.js",
     "iniciar-prova": "node src/avaliador/iniciar-prova.js",
     "desinstalar": "npm uninstall sequelize pg pg-hstore && npm uninstall -D sequelize-cli",
-    "resetao": "npm uninstall sequelize pg pg-hstore && npm uninstall -D sequelize-cli && node src/avaliador/reset.js && rm -rf ./src/controllers"
+    "resetao": "npm uninstall sequelize pg pg-hstore && npm uninstall -D sequelize-cli && node src/avaliador/reset.js && rimraf ./src/controllers"
   },
   "dependencies": {
     "express": "^4.18.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "rimraf": "^6.1.3"
   }
 }
