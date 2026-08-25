@@ -1,0 +1,217 @@
+{
+  "pontos": 27,
+  "total": 100,
+  "itens": [
+    {
+      "nome": "Sequelize instalado",
+      "ok": false,
+      "pontos": 3,
+      "codigo": "sequelize"
+    },
+    {
+      "nome": "Sequelize CLI instalado",
+      "ok": false,
+      "pontos": 3,
+      "codigo": "sequelize-cli"
+    },
+    {
+      "nome": "PG instalado",
+      "ok": false,
+      "pontos": 3,
+      "codigo": "pg"
+    },
+    {
+      "nome": "PG-HSTORE instalado",
+      "ok": false,
+      "pontos": 3,
+      "codigo": "pg-hstore"
+    },
+    {
+      "nome": "Estrutura do Sequelize criada",
+      "ok": false,
+      "pontos": 6,
+      "codigo": "config/ + models/ + database/migrations/ + seeders/"
+    },
+    {
+      "nome": "Username configurado",
+      "ok": false,
+      "pontos": 2,
+      "codigo": "username: \"postgres\""
+    },
+    {
+      "nome": "Database configurado",
+      "ok": false,
+      "pontos": 2,
+      "codigo": "database: \"piloto_saep\""
+    },
+    {
+      "nome": "Host configurado",
+      "ok": false,
+      "pontos": 2,
+      "codigo": "host: \"localhost\""
+    },
+    {
+      "nome": "Dialect configurado",
+      "ok": false,
+      "pontos": 2,
+      "codigo": "dialect: \"postgres\""
+    },
+    {
+      "nome": "Porta configurada",
+      "ok": false,
+      "pontos": 2,
+      "codigo": "port: 5432"
+    },
+    {
+      "nome": "Configuração importada",
+      "ok": false,
+      "pontos": 2,
+      "codigo": ""
+    },
+    {
+      "nome": "Conexão Sequelize criada",
+      "ok": false,
+      "pontos": 3,
+      "codigo": "const sequelize = new Sequelize(...)"
+    },
+    {
+      "nome": "Model Produto criada",
+      "ok": false,
+      "pontos": 5,
+      "codigo": "models/produto.js"
+    },
+    {
+      "nome": "Migration Produto criada",
+      "ok": false,
+      "pontos": 4,
+      "codigo": "create-produto"
+    },
+    {
+      "nome": "Importação do Model",
+      "ok": true,
+      "pontos": 2,
+      "codigo": "const { produto } = require(\"../models\")"
+    },
+    {
+      "nome": "Classe produtoController",
+      "ok": true,
+      "pontos": 1,
+      "codigo": "class produtoController"
+    },
+    {
+      "nome": "Método store()",
+      "ok": true,
+      "pontos": 2,
+      "codigo": "async store(req, res)"
+    },
+    {
+      "nome": "Captura do req.body",
+      "ok": true,
+      "pontos": 1,
+      "codigo": "const { nome, preco, quantidade } = req.body"
+    },
+    {
+      "nome": "Criação do Produto",
+      "ok": true,
+      "pontos": 5,
+      "codigo": "produto.create({ nome, preco, quantidade })"
+    },
+    {
+      "nome": "Retorno do store()",
+      "ok": true,
+      "pontos": 1,
+      "codigo": "return res.status(200).json(createdProduto)"
+    },
+    {
+      "nome": "Método index()",
+      "ok": true,
+      "pontos": 2,
+      "codigo": "async index(req, res)"
+    },
+    {
+      "nome": "Busca de Produtos",
+      "ok": true,
+      "pontos": 4,
+      "codigo": "produto.findAll()"
+    },
+    {
+      "nome": "Retorno do index()",
+      "ok": true,
+      "pontos": 1,
+      "codigo": "return res.status(200).json(produtos)"
+    },
+    {
+      "nome": "Exportação do Controller",
+      "ok": true,
+      "pontos": 1,
+      "codigo": "module.exports = new produtoController()"
+    },
+    {
+      "nome": "Importação do Controller nas Rotas",
+      "ok": false,
+      "pontos": 1,
+      "codigo": "require(\"./controllers/produtoController\")"
+    },
+    {
+      "nome": "Rota GET /produto",
+      "ok": false,
+      "pontos": 3,
+      "codigo": "routes.get(\"/produto\", produtoController.index)"
+    },
+    {
+      "nome": "Rota POST /produto",
+      "ok": false,
+      "pontos": 3,
+      "codigo": "routes.post(\"/produto\", produtoController.store)"
+    },
+    {
+      "nome": "Cabeçalho do update()",
+      "ok": false,
+      "pontos": 4,
+      "codigo": "async update(req, res) + req.params + req.body"
+    },
+    {
+      "nome": "Atualização do Produto",
+      "ok": false,
+      "pontos": 6,
+      "codigo": "produto.update({ nome, preco, quantidade }, { where: { id } })"
+    },
+    {
+      "nome": "Retorno do update()",
+      "ok": false,
+      "pontos": 1,
+      "codigo": "return res.status(200).json(...)"
+    },
+    {
+      "nome": "Cabeçalho do destroy()",
+      "ok": true,
+      "pontos": 3,
+      "codigo": "async destroy(req, res) + req.params"
+    },
+    {
+      "nome": "Exclusão do Produto",
+      "ok": true,
+      "pontos": 4,
+      "codigo": "produto.destroy({ where: { id } })"
+    },
+    {
+      "nome": "Retorno do destroy()",
+      "ok": false,
+      "pontos": 1,
+      "codigo": "return res.status(200).json(...)"
+    },
+    {
+      "nome": "Rota PUT /produto/:id",
+      "ok": false,
+      "pontos": 6,
+      "codigo": "routes.put(\"/produto/:id\", produtoController.update)"
+    },
+    {
+      "nome": "Rota DELETE /produto/:id",
+      "ok": false,
+      "pontos": 6,
+      "codigo": "routes.delete(\"/produto/:id\", produtoController.destroy)"
+    }
+  ],
+  "nota": 2.7
+}

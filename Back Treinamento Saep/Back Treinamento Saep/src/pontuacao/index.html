@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progresso do Aluno</title>
+<style>
+body{font-family:Arial,sans-serif;max-width:900px;margin:30px auto;padding:0 18px;background:#f7f7f7;color:#222}
+.card{background:#fff;border-radius:10px;padding:20px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+progress{width:100%;height:34px}.resumo{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.resumo h2,.resumo h3{margin:6px 0}
+ul{padding:0;list-style:none}.item{margin:9px 0;padding:12px;border-radius:7px;border:1px solid #ddd}.item.ok{color:#2e7d32;opacity:.45;text-decoration:line-through;background:#f1f8f1}.item.erro{color:#c62828;background:#fff5f5}.linha{display:flex;justify-content:space-between;gap:12px}.codigo{font-family:Consolas,monospace;font-size:13px;margin-top:7px;padding:8px;background:#eee;color:#333;overflow:auto}.ok .codigo{color:#555}.pontos{font-weight:bold;white-space:nowrap}.muted{color:#666;font-size:13px}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>🏆 Progresso do Aluno</h1>
+<div class="resumo"><h2 id="score">0/100 pontos</h2><h3 id="nota">Nota: 0,0 / 10</h3></div>
+<h3 id="tempo">⏱ Iniciando prova...</h3><h3 id="status">Status: --</h3>
+<progress id="barra" value="0" max="100"></progress>
+<div class="resumo"><span>Acertos</span><strong id="percentual">0%</strong></div>
+</div>
+<div class="card"><h2>Requisitos da prova</h2><p class="muted">Os trechos abaixo vêm diretamente do resultado do corretor. Quando o requisito for acertado, ele fica fosco.</p><ul id="tarefas"></ul></div>
+<script>
+let provaIniciadaNaPagina = false;
+async function garantirProva(){
+  if(provaIniciadaNaPagina) return;
+  const r=await fetch('/prova'); const p=await r.json();
+  if(p.status!=='EM ANDAMENTO') await fetch('/iniciar-prova',{method:'POST'});
+  provaIniciadaNaPagina=true;
+}
+async function atualizarTempo(){
+ try{
+  await garantirProva();
+  const resposta=await fetch('/prova'); const prova=await resposta.json();
+  if(!prova.inicio){document.getElementById('tempo').innerText='⏱ Aguardando início...';return;}
+  if(prova.status==='CONCLUÍDA'||prova.encerrada){document.getElementById('tempo').innerText=`🏁 Tempo utilizado: ${prova.tempoUtilizado||'--:--'}`;document.getElementById('status').innerText=`Status: ${prova.status||'ENCERRADA'}`;return;}
+  const fim=new Date(prova.inicio).getTime()+prova.duracaoMinutos*60000;let restante=Math.max(0,Math.floor((fim-Date.now())/1000));
+  if(restante===0){await fetch('/encerrar-prova',{method:'POST'});return atualizarTempo();}
+  const m=Math.floor(restante/60),s=restante%60;document.getElementById('tempo').innerText=`⏱ Tempo restante: ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;document.getElementById('status').innerText='Status: EM ANDAMENTO';
+ }catch(e){document.getElementById('tempo').innerText='⏱ Erro ao carregar o tempo';}
+}
+async function atualizar(){
+ try{
+  const resposta=await fetch('/score?ts='+Date.now()); const dados=await resposta.json();
+  document.getElementById('score').innerText=`${dados.pontos}/${dados.total} pontos`;
+  document.getElementById('nota').innerText=`Nota: ${Number(dados.nota||0).toFixed(1).replace('.',',')} / 10`;
+  const percentual=dados.total?Math.round(dados.pontos/dados.total*100):0;document.getElementById('barra').value=percentual;document.getElementById('percentual').innerText=`${percentual}%`;
+  document.getElementById('tarefas').innerHTML=(dados.itens||[]).map(item=>`<li class="item ${item.ok?'ok':'erro'}"><div class="linha"><span>${item.ok?'✅':'❌'} ${escapeHtml(item.nome)}</span><span class="pontos">${item.ok?item.pontos:0}/${item.pontos} pts</span></div><div class="codigo">${escapeHtml(item.codigo||'Código/requisito não informado')}</div></li>`).join('');
+ }catch(e){console.error(e)}
+}
+function escapeHtml(v){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+(async()=>{await garantirProva();await atualizar();await atualizarTempo();setInterval(atualizar,2000);setInterval(atualizarTempo,1000);})();
+</script>
+</body></html>

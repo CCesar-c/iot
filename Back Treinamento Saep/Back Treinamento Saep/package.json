@@ -1,0 +1,22 @@
+{
+  "name": "node-base",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "avaliar": "node src/avaliador/corretor.js",
+    "watch": "node src/avaliador/watch.js",
+    "reset": "node src/avaliador/reset.js",
+    "iniciar-prova": "node src/avaliador/iniciar-prova.js",
+    "desinstalar": "npm uninstall sequelize pg pg-hstore && npm uninstall -D sequelize-cli",
+    "resetao": "npm uninstall sequelize pg pg-hstore && npm uninstall -D sequelize-cli && node src/avaliador/reset.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
