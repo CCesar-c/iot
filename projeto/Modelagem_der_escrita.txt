@@ -1,0 +1,30 @@
+- usuarios
+* id_usuario
+* email
+* senha
+* cargo
+
+- clientes
+* cpf
+* nome
+* telefone
+* data_nasc
+
+- veiculos
+* id_veiculo
+* modelo
+* marca
+* ano
+* cpf_cliente (foreing key)
+
+- ordem (Ordem e servicio)
+* id_ordem 
+* data_entrada
+* valor
+* data_saida
+* cpf_cliente (foreing key)
+* id_veiculo (foreing key)
+* id_usuario (foreing key)
+
+
+
