@@ -14,7 +14,12 @@
     "resetao": "npm uninstall sequelize pg pg-hstore && npm uninstall -D cors && node src/avaliador/reset.js && rimraf ./src/controllers && rimraf ./src/public"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mysql2": "^3.24.2",
+    "pg": "^8.23.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.8",
+    "sequelize-cli": "^6.6.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.20",

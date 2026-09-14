@@ -1,7 +1,7 @@
 {
-  "inicio": null,
-  "encerrada": false,
-  "notaFinal": null,
-  "status": "EM ANDAMENTO",
-  "tempoUtilizado": null
+  "inicio": "2026-08-31T17:08:31.110Z",
+  "encerrada": true,
+  "notaFinal": 8,
+  "status": "ENCERRADA POR TEMPO",
+  "tempoUtilizado": "29:59"
 }

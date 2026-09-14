@@ -2,10 +2,12 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
+// const cors = require("cors")
 const routes = require("./routes");
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "pontuacao")));
+// app.use(cors())
 app.use(routes);
 const avaliadorDir = path.join(__dirname, "avaliador");
 const scorePath = path.join(avaliadorDir, "score.json");
