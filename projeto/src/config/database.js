@@ -1,9 +1,10 @@
 module.exports = {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "database_development",
+    "password": "senai",
+    "database": "oficina_saep",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "port": 3306
   }
 }

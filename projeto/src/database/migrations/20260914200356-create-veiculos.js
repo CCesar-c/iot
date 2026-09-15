@@ -4,7 +4,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('veiculos', {
       id_veiculo: {
-                allowNull: false,
+        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
@@ -18,11 +18,11 @@ module.exports = {
       ano: {
         type: Sequelize.INTEGER
       },
-      cpf_cliente: {
+      id_cliente: {
         type: Sequelize.INTEGER,
-        references:{
-          model:"clientes",
-          key:"cpf"
+        references: {
+          model: "clientes",
+          key: "id_cliente"
         }
       },
       createdAt: {

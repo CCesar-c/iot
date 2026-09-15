@@ -1,28 +1,29 @@
 - usuarios
-* id_usuario
+* id_usuario (primary key)
 * email
 * senha
 * cargo
 
 - clientes
+* id_cliente (primary key)
 * cpf
 * nome
 * telefone
-* data_nasc
+
 
 - veiculos
-* id_veiculo
+* id_veiculo (primary key)
 * modelo
 * marca
 * ano
-* cpf_cliente (foreing key)
+* id_cliente (foreing key)
 
 - ordem (Ordem e servicio)
-* id_ordem 
+* id_ordem (primary key)
 * data_entrada
 * valor
 * data_saida
-* cpf_cliente (foreing key)
+* id_cliente (foreing key)
 * id_veiculo (foreing key)
 * id_usuario (foreing key)
 

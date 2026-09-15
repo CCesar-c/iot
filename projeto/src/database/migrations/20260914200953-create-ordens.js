@@ -10,22 +10,40 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       data_entrada: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       valor: {
+        allowNull: false,
         type: Sequelize.FLOAT
       },
       data_saida: {
+        allowNull: false,
         type: Sequelize.DATE
       },
-      cpf_cliente: {
-        type: Sequelize.INTEGER
+      id_cliente: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "clientes",
+          key: "id_cliente"
+        }
       },
       id_veiculo: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "veiculos",
+          key: "id_veiculo"
+        }
       },
       id_usuario: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+
+        type: Sequelize.INTEGER,
+        references: {
+          model: "usuarios",
+          key: "id_usuario"
+        }
       },
       createdAt: {
         allowNull: false,
