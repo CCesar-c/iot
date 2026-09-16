@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>panel</title>
+</head>
+
+<body>
+
+    <p id="email_h1"></p>
+
+    <h1>clientes</h1>
+    <div id="clientes_list"></div>
+    <h3>buscar por cpf</h3>
+    <input type="number" id="cpf_input" placeholder="cpf" onchange="receber_por_cpf()">
+
+    <h1>veiculos</h1>
+    <div id="veiculos_list"></div>
+    <h3>criar veiculos</h3>
+    <input type="number" id="cpf_input" placeholder="cpf">
+
+    <h1>ordens</h1>
+    <div id="ordens_list"></div>
+    <h3>criar ordem</h3>
+    <input type="number" id="cpf_input" placeholder="cpf">
+</body>
+
+<script>
+    document.querySelector("#email_h1").textContent = `Seja Bem-vindo, ${localStorage.getItem("email")}`
+    async function receber_clientes() {
+        const receber = await fetch("http://localhost:3331/clientes");
+        const jsoneado = await receber.json()
+        console.log(jsoneado);
+
+        for (const cli of jsoneado) {
+            document.getElementById("clientes_list").innerHTML += `<p># id_cliente - ${cli.id_cliente} 
+            \n cpf -${cli.cpf} 
+            \n nome -${cli.nome} 
+            \n telefone -${cli.telefone} </p>`
+        }
+
+    }
+    receber_clientes();
+
+    async function receber_veiculos() {
+        const receber = await fetch("http://localhost:3331/veiculos");
+        const jsoneado = await receber.json()
+        console.log(jsoneado);
+
+        for (const cli of jsoneado) {
+            document.getElementById("clientes_list").innerHTML += `<p># id_cliente - ${cli.id_veiculo} 
+            \n cpf -${cli.modelo} 
+            \n nome -${cli.marca} 
+            \n telefone -${cli.ano} </p>
+            \n telefone -${cli.id_cliente} </p>`
+        }
+
+    }
+    receber_veiculos();
+
+    async function receber_ordens() {
+        const receber = await fetch("http://localhost:3331/ordens");
+        const jsoneado = await receber.json()
+        console.log(jsoneado);
+
+        for (const cli of jsoneado) {
+            document.getElementById("clientes_list").innerHTML += `<p># id_cliente - ${cli.id_veiculo} 
+            \n cpf -${cli.modelo} 
+            \n nome -${cli.marca} 
+            \n telefone -${cli.ano} </p>
+            \n telefone -${cli.id_cliente} </p>`
+        }
+
+    }
+    receber_ordens();
+
+    async function receber_por_cpf() {
+        var cpf = Number(document.getElementById("cpf_input").value);
+        const receber = await fetch(`http://localhost:3331/clientes/${cpf}`);
+        const jsoneado = await receber.json()
+        for (const cli of jsoneado) {
+            document.getElementById("clientes_list").innerHTML = `<p># id_cliente - ${cli.id_cliente} 
+            \n cpf -${cli.cpf} 
+            \n nome -${cli.nome} 
+            \n telefone -${cli.telefone} </p>`
+        }
+    }
+    // setTimeout(() => {
+    //     alert("expirou")
+    //     window.location.href = "http://127.0.0.1:5500/src/public/login.html";
+
+    // },600000 )
+</script>
+
+</html>

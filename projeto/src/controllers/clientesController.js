@@ -1,6 +1,13 @@
 const { clientes } = require("../models/")
 
 class clientesController {
+    async receber_por_cpf(req, res) {
+        const { cpf } = req.params;
+        const receber_clientes = await clientes.findAll({
+            where: {cpf}
+        });
+        res.status(200).json(receber_clientes)
+    }
     async receber(req, res) {
         const receber_clientes = await clientes.findAll();
         res.status(200).json(receber_clientes)

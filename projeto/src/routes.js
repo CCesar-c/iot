@@ -19,6 +19,7 @@ routes.delete("/usuarios/:id", usuariosController.deletar)
 
 
 routes.get("/clientes", clientesController.receber)
+routes.get("/clientes/:cpf", clientesController.receber_por_cpf)
 routes.post("/clientes", clientesController.enviar)
 routes.put("/clientes/:id", clientesController.atualizar)
 routes.delete("/clientes/:id", clientesController.deletar)

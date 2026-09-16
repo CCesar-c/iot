@@ -14,10 +14,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   clientes.init({
+    id_cliente: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     cpf: DataTypes.INTEGER,
     nome: DataTypes.STRING,
     telefone: DataTypes.INTEGER,
-    data_nasc: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'clientes',

@@ -14,7 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ordens.init({
-    id_ordem: DataTypes.INTEGER,
+    id_ordem: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     data_entrada: DataTypes.DATE,
     valor: DataTypes.FLOAT,
     data_saida: DataTypes.DATE,

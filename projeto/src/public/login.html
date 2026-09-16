@@ -1,19 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
 </head>
+
 <body>
-    <input  placeholder="email" type="email">
-    <input  placeholder="senha" type="password">
-    <button onclick="logar()" >entrar</button>
+    <input id="email" placeholder="email" type="email">
+    <input id="senha" placeholder="senha" type="password">
+    <button onclick="logar()">entrar</button>
 
     <script>
         async function logar() {
-            let email = 
+            let email = document.querySelector("#email").value
+            let senha = document.querySelector("#senha").value
+
+            const receber = await fetch("http://localhost:3331/usuarios");
+            const jsoneado = await receber.json()
+            console.log(jsoneado)
+
+            for (const users of jsoneado) {
+
+                if (users.email == email && users.senha == senha) {
+                    alert("entrando no sistema");
+                    localStorage.setItem("email", users.email)
+                    localStorage.setItem("senha", users.senha)
+                    window.location.href = "http://127.0.0.1:5500/src/public/index.html";
+                } else {
+                    alert("email ou senha erradas");
+                }
+            }
+
         }
     </script>
 </body>
+
 </html>

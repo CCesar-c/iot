@@ -14,7 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   veiculos.init({
-    id_veiculo: DataTypes.INTEGER,
+    id_veiculo: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     modelo: DataTypes.STRING,
     marca: DataTypes.STRING,
     ano: DataTypes.INTEGER,
