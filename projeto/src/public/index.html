@@ -29,6 +29,7 @@
 
 <script>
     document.querySelector("#email_h1").textContent = `Seja Bem-vindo, ${localStorage.getItem("email")}`
+
     async function receber_clientes() {
         const receber = await fetch("http://localhost:3331/clientes");
         const jsoneado = await receber.json()
@@ -49,12 +50,12 @@
         const jsoneado = await receber.json()
         console.log(jsoneado);
 
-        for (const cli of jsoneado) {
-            document.getElementById("clientes_list").innerHTML += `<p># id_cliente - ${cli.id_veiculo} 
-            \n cpf -${cli.modelo} 
-            \n nome -${cli.marca} 
-            \n telefone -${cli.ano} </p>
-            \n telefone -${cli.id_cliente} </p>`
+        for (const vec of jsoneado) {
+            document.getElementById("veiculos_list").innerHTML += `<p># id_veiculo - ${vec.id_veiculo} 
+            \n modelo -${vec.modelo} 
+            \n marca -${vec.marca} 
+            \n ano -${vec.ano} </p>
+            \n id_cliente -${vec.id_cliente} </p>`
         }
 
     }
@@ -65,12 +66,14 @@
         const jsoneado = await receber.json()
         console.log(jsoneado);
 
-        for (const cli of jsoneado) {
-            document.getElementById("clientes_list").innerHTML += `<p># id_cliente - ${cli.id_veiculo} 
-            \n cpf -${cli.modelo} 
-            \n nome -${cli.marca} 
-            \n telefone -${cli.ano} </p>
-            \n telefone -${cli.id_cliente} </p>`
+        for (const ordem of jsoneado) {
+            document.getElementById("ordens_list").innerHTML += `<p># id_ordem - ${ordem.id_ordem} 
+            \n data_entrada -${ordem.data_entrada} 
+            \n valor -${ordem.valor} 
+            \n data_saida -${ordem.data_saida} </p>
+            \n id_cliente -${ordem.id_cliente} </p>
+            \n id_veiculo -${ordem.id_veiculo} </p>
+            \n id_usuario -${ordem.id_usuario} </p>`
         }
 
     }

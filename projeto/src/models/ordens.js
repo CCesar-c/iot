@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     data_entrada: DataTypes.DATE,
     valor: DataTypes.FLOAT,
     data_saida: DataTypes.DATE,
-    cpf_cliente: DataTypes.INTEGER,
+    id_cliente: DataTypes.INTEGER,
     id_veiculo: DataTypes.INTEGER,
     id_usuario: DataTypes.INTEGER
   }, {

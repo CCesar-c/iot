@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     modelo: DataTypes.STRING,
     marca: DataTypes.STRING,
     ano: DataTypes.INTEGER,
-    cpf_cliente: DataTypes.INTEGER
+    id_cliente: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'veiculos',
