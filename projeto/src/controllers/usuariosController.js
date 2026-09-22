@@ -1,6 +1,18 @@
 const { usuarios } = require("../models/")
 
 class usuariosController {
+    async logar(req, res) {
+        const [email, senha] = req.body;
+        const receber_usuarios = await usuarios.findAll();
+        for (const users of receber_usuarios) {
+
+            if (users.email == email && users.senha == senha) {
+                
+            } else {
+
+            }
+        }
+    }
     async receber(req, res) {
         const receber_usuarios = await usuarios.findAll();
         res.status(200).json(receber_usuarios)
