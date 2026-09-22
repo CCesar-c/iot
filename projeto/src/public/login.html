@@ -17,20 +17,25 @@
             let email = document.querySelector("#email").value
             let senha = document.querySelector("#senha").value
 
-            const receber = await fetch("http://localhost:3331/usuarios");
-            const jsoneado = await receber.json()
-            console.log(jsoneado)
-
-            for (const users of jsoneado) {
-
-                if (users.email == email && users.senha == senha) {
-                    alert("entrando no sistema");
-                    localStorage.setItem("email", users.email)
-                    localStorage.setItem("senha", users.senha)
-                    window.location.href = "http://127.0.0.1:5500/src/public/index.html";
-                } else {
-                    alert("email ou senha erradas");
-                }
+            const receber = await fetch("http://localhost:3331/usuarios_logar", {
+                method: "Post",
+                headers: {
+                    "Content-Type": "Application/json"
+                },
+                body: JSON.stringify({
+                    email,
+                    senha
+                })
+            });
+            let token = await receber.json()
+            console.log(token.token)
+            if (token) {
+                alert("entrando no sistema");
+                localStorage.setItem("email", email)
+                localStorage.setItem("token", token.token)
+                window.location.href = "http://127.0.0.1:5500/src/public/index.html";
+            } else {
+                alert("email ou senha erradas");
             }
 
         }

@@ -16,18 +16,51 @@
     <h3>buscar por cpf</h3>
     <input type="number" id="cpf_input" placeholder="cpf" onchange="receber_por_cpf()">
 
+
+    <h3>criar cliente</h3>
+    <input type="number" id="id_cliente" placeholder="id_cliente">
+    <input type="text" id="cpf" placeholder="cpf">
+    <input type="text" id="nome" placeholder="nome">
+    <input type="number" id="telefone" placeholder="telefone">
+    <button type="button" onclick="criar_clientes()">enviar</button>
+
+
+
+
     <h1>veiculos</h1>
     <div id="veiculos_list"></div>
     <h3>criar veiculos</h3>
-    <input type="number" id="cpf_input" placeholder="cpf">
+    <input type="number" id="id_veiculo" placeholder="id_veiculo">
+    <input type="text" id="modelo_veiculo" placeholder="modelo_veiculo">
+    <input type="text" id="marca_veiculo" placeholder="marca_veiculo">
+    <input type="number" id="ano_veiculo" placeholder="ano_veiculo">
+    <input type="number" id="id_cliente" placeholder="id_cliente">
+    <button type="button" onclick="criar_veiculos()">enviar</button>
+
 
     <h1>ordens</h1>
-    <div id="ordens_list"></div>
+    <div id='ordens_list'></div>
     <h3>criar ordem</h3>
-    <input type="number" id="cpf_input" placeholder="cpf">
+    <input type="number" id="id_ordem" placeholder="id_ordem">
+    <input type="text" id="data_entrada" placeholder="data_entrada">
+    <input type="text" id="valor" placeholder="valor">
+    <input type="text" id="data_saida" placeholder="data_saida">
+    <input type="number" id="id_cliente" placeholder="id_cliente">
+    <input type="number" id="id_veiculo" placeholder="id_veiculo">
+    <input type="number" id="id_usuario" placeholder="id_usuario">
+    <button type="button" onclick="criar_ordens()">enviar</button>
 </body>
 
 <script>
+    setTimeout(() => {
+        let token = localStorage.getItem("token")
+        console.log(token)
+        if (!token) {
+            alert("expirou")
+            window.location.href = "http://127.0.0.1:5500/src/public/login.html";
+        }
+
+    }, 1000)
     document.querySelector("#email_h1").textContent = `Seja Bem-vindo, ${localStorage.getItem("email")}`
 
     async function receber_clientes() {
@@ -90,11 +123,73 @@
             \n telefone -${cli.telefone} </p>`
         }
     }
-    // setTimeout(() => {
-    //     alert("expirou")
-    //     window.location.href = "http://127.0.0.1:5500/src/public/login.html";
+    async function criar_veiculos() {
+        let id_veiculo = document.querySelector("#id_veiculo").value
+        let modelo = document.querySelector("#modelo_veiculo").value
+        let marca = document.querySelector("#marca_veiculo").value
+        let ano = document.querySelector("#ano_veiculo").value
+        let id_cliente = document.querySelector("#id_cliente").value
 
-    // },600000 )
+        const receber = await fetch("http://localhost:3331/veiculos", {
+            method: "Post",
+            headers: {
+                "Content-Type": "Application/json"
+            },
+            body: JSON.stringify({
+                id_veiculo,
+                modelo,
+                marca,
+                ano,
+                id_cliente
+            })
+        });
+    }
+
+    async function criar_clientes() {
+        let id_cliente = document.querySelector("#id_cliente").value
+        let cpf = document.querySelector("#cpf").value
+        let nome = document.querySelector("#nome").value
+        let telefone = document.querySelector("#telefone").value
+
+        const receber = await fetch("http://localhost:3331/clientes", {
+            method: "Post",
+            headers: {
+                "Content-Type": "Application/json"
+            },
+            body: JSON.stringify({
+                id_cliente,
+                cpf,
+                nome,
+                telefone
+            })
+        });
+    }
+
+    async function criar_ordens() {
+        let id_ordem = document.querySelector("#id_ordem").value
+        let data_entrada = document.querySelector("#data_entrada").value
+        let valor = document.querySelector("#valor").value
+        let data_saida = document.querySelector("#data_saida").value
+        let id_veiculo = document.querySelector("#id_veiculo").value
+        let id_cliente = document.querySelector("#id_cliente").value
+        let id_usuario = document.querySelector("#id_usuario").value
+
+        const receber = await fetch("http://localhost:3331/ordens", {
+            method: "Post",
+            headers: {
+                "Content-Type": "Application/json"
+            },
+            body: JSON.stringify({
+                id_ordem,
+                data_entrada,
+                valor,
+                data_saida,
+                id_veiculo,
+                id_cliente,
+                id_usuario
+            })
+        });
+    }
 </script>
 
 </html>

@@ -13,6 +13,7 @@ routes.get("/", (req, res) => {
 
 // Rotas de Produtos
 routes.get("/usuarios", usuariosController.receber)
+routes.post("/usuarios_logar", usuariosController.logar)
 routes.post("/usuarios", usuariosController.enviar)
 routes.put("/usuarios/:id", usuariosController.atualizar)
 routes.delete("/usuarios/:id", usuariosController.deletar)

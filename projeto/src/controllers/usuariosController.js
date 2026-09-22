@@ -1,15 +1,17 @@
-const { usuarios } = require("../models/")
+const { usuarios } = require("../models")
+const jwt = require("jsonwebtoken")
+
+let jwt_secret_key = "hola";
 
 class usuariosController {
     async logar(req, res) {
-        const [email, senha] = req.body;
+        const { email, senha } = req.body;
         const receber_usuarios = await usuarios.findAll();
         for (const users of receber_usuarios) {
 
             if (users.email == email && users.senha == senha) {
-                
-            } else {
-
+                const token = jwt.sign({ email: email }, jwt_secret_key, { expiresIn: "1h" })
+                return res.status(200).json({ token })
             }
         }
     }
