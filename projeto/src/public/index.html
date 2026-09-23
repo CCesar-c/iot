@@ -11,6 +11,15 @@
 
     <p id="email_h1"></p>
 
+
+    <h3>criar usuarios</h3>
+    <input type="number" id="id_usuario1" placeholder="id_usuario">
+    <input type="text" id="email" placeholder="email">
+    <input type="text" id="senha" placeholder="senha">
+    <input type="text" id="cargo" placeholder="cargo">
+    <button type="button" onclick="criar_usuarios()">enviar</button>
+
+
     <h1>clientes</h1>
     <div id="clientes_list"></div>
     <h3>buscar por cpf</h3>
@@ -25,12 +34,10 @@
     <button type="button" onclick="criar_clientes()">enviar</button>
 
 
-
-
     <h1>veiculos</h1>
     <div id="veiculos_list"></div>
     <h3>criar veiculos</h3>
-    <input type="number" id="id_veiculo" placeholder="id_veiculo">
+    <input type="number" id="id_veiculo1" placeholder="id_veiculo">
     <input type="text" id="modelo_veiculo" placeholder="modelo_veiculo">
     <input type="text" id="marca_veiculo" placeholder="marca_veiculo">
     <input type="number" id="ano_veiculo" placeholder="ano_veiculo">
@@ -46,8 +53,8 @@
     <input type="text" id="valor" placeholder="valor">
     <input type="text" id="data_saida" placeholder="data_saida">
     <input type="number" id="id_cliente3" placeholder="id_cliente">
-    <input type="number" id="id_veiculo" placeholder="id_veiculo">
-    <input type="number" id="id_usuario" placeholder="id_usuario">
+    <input type="number" id="id_veiculo2" placeholder="id_veiculo">
+    <input type="number" id="id_usuario2" placeholder="id_usuario">
     <button type="button" onclick="criar_ordens()">enviar</button>
 </body>
 
@@ -123,30 +130,9 @@
             \n telefone -${cli.telefone} </p>`
         }
     }
-    async function criar_veiculos() {
-        let id_veiculo = document.querySelector("#id_veiculo").value
-        let modelo = document.querySelector("#modelo_veiculo").value
-        let marca = document.querySelector("#marca_veiculo").value
-        let ano = document.querySelector("#ano_veiculo").value
-        let id_cliente = document.querySelector("#id_cliente").value
-
-        const receber = await fetch("http://localhost:3331/veiculos", {
-            method: "Post",
-            headers: {
-                "Content-Type": "Application/json"
-            },
-            body: JSON.stringify({
-                id_veiculo,
-                modelo,
-                marca,
-                ano,
-                id_cliente
-            })
-        });
-    }
 
     async function criar_clientes() {
-        let id_cliente = document.querySelector("#id_cliente").value
+        let id_cliente = document.querySelector("#id_cliente1").value
         let cpf = document.querySelector("#cpf").value
         let nome = document.querySelector("#nome").value
         let telefone = document.querySelector("#telefone").value
@@ -165,14 +151,57 @@
         });
     }
 
+    async function criar_usuarios() {
+        let id_usuario = document.querySelector("#id_usuario1").value
+        let email = document.querySelector("#email").value
+        let senha = document.querySelector("#senha").value
+        let cargo = document.querySelector("#cargo").value
+
+        const receber = await fetch("http://localhost:3331/usuarios", {
+            method: "Post",
+            headers: {
+                "Content-Type": "Application/json"
+            },
+            body: JSON.stringify({
+                id_usuario,
+                email,
+                senha,
+                cargo
+            })
+        });
+    }
+
+    async function criar_veiculos() {
+        let id_veiculo = document.querySelector("#id_veiculo1").value
+        let modelo = document.querySelector("#modelo_veiculo").value
+        let marca = document.querySelector("#marca_veiculo").value
+        let ano = document.querySelector("#ano_veiculo").value
+        let id_cliente = document.querySelector("#id_cliente2").value
+
+        const receber = await fetch("http://localhost:3331/veiculos", {
+            method: "Post",
+            headers: {
+                "Content-Type": "Application/json"
+            },
+            body: JSON.stringify({
+                id_veiculo,
+                modelo,
+                marca,
+                ano,
+                id_cliente
+            })
+        });
+    }
+
+
     async function criar_ordens() {
         let id_ordem = document.querySelector("#id_ordem").value
         let data_entrada = document.querySelector("#data_entrada").value
         let valor = document.querySelector("#valor").value
         let data_saida = document.querySelector("#data_saida").value
-        let id_veiculo = document.querySelector("#id_veiculo").value
-        let id_cliente = document.querySelector("#id_cliente").value
-        let id_usuario = document.querySelector("#id_usuario").value
+        let id_veiculo = document.querySelector("#id_veiculo2").value
+        let id_cliente = document.querySelector("#id_cliente3").value
+        let id_usuario = document.querySelector("#id_usuario2").value
 
         const receber = await fetch("http://localhost:3331/ordens", {
             method: "Post",
@@ -190,6 +219,16 @@
             })
         });
     }
+
 </script>
+<br>
+<br>
+<br>
+<br>
+<button onclick="(()=>{
+    alert('voce foi deslogado')
+    localStorage.removeItem('token')
+    window.location.href = (`http://127.0.0.1:5500/src/public/login.html`);
+    })();">deslogar</button>
 
 </html>

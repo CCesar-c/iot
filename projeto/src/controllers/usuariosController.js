@@ -1,5 +1,6 @@
 const { usuarios } = require("../models")
 const jwt = require("jsonwebtoken")
+const bcrypt = require("bcryptjs")
 
 let jwt_secret_key = "hola";
 
@@ -8,10 +9,12 @@ class usuariosController {
         const { email, senha } = req.body;
         const receber_usuarios = await usuarios.findAll();
         for (const users of receber_usuarios) {
-
-            if (users.email == email && users.senha == senha) {
+            let verificar_senha = await bcrypt.compare(senha,users.senha)
+            if (users.email == email && verificar_senha) {
                 const token = jwt.sign({ email: email }, jwt_secret_key, { expiresIn: "1h" })
                 return res.status(200).json({ token })
+            }else{
+                console.log("usuario nao encontrado")
             }
         }
     }
@@ -21,10 +24,15 @@ class usuariosController {
     }
     async enviar(req, res) {
         const { id_usuario, email, senha, cargo } = req.body;
-        const receber_usuarios = await usuarios.create({
+        let senha_encriptada = await bcrypt.hash(senha, 10);
+        let new_senha = String(senha_encriptada);
+        console.log(senha)
+        console.log(senha_encriptada)
+        console.log(new_senha)
+        let receber_usuarios = await usuarios.create({
             id_usuario,
             email,
-            senha,
+            senha: new_senha,
             cargo
         });
         res.status(200).json(receber_usuarios)
